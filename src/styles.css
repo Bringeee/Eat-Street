@@ -1,0 +1,193 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-saffron: var(--saffron);
+  --color-maroon: var(--maroon);
+
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 3s linear infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Indian-themed dark palette */
+  --background: oklch(0.16 0.018 40);
+  --foreground: oklch(0.95 0.02 80);
+
+  --card: oklch(0.2 0.022 40);
+  --card-foreground: oklch(0.95 0.02 80);
+
+  --popover: oklch(0.18 0.02 40);
+  --popover-foreground: oklch(0.95 0.02 80);
+
+  /* Saffron primary */
+  --primary: oklch(0.74 0.17 55);
+  --primary-foreground: oklch(0.18 0.02 40);
+
+  /* Maroon secondary */
+  --secondary: oklch(0.32 0.1 20);
+  --secondary-foreground: oklch(0.95 0.02 80);
+
+  --muted: oklch(0.24 0.02 40);
+  --muted-foreground: oklch(0.72 0.03 70);
+
+  --accent: oklch(0.45 0.15 25);
+  --accent-foreground: oklch(0.97 0.02 80);
+
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.97 0.02 80);
+
+  --border: oklch(0.3 0.04 50 / 0.5);
+  --input: oklch(0.28 0.03 50);
+  --ring: oklch(0.74 0.17 55);
+
+  --gold: oklch(0.78 0.13 80);
+  --saffron: oklch(0.74 0.17 55);
+  --maroon: oklch(0.35 0.13 20);
+
+  --gradient-hero: linear-gradient(
+    180deg,
+    oklch(0.16 0.018 40 / 0.4) 0%,
+    oklch(0.16 0.018 40 / 0.85) 60%,
+    oklch(0.16 0.018 40) 100%
+  );
+  --gradient-gold: linear-gradient(135deg, oklch(0.78 0.13 80), oklch(0.68 0.16 60));
+  --gradient-warm: linear-gradient(135deg, oklch(0.45 0.15 25), oklch(0.3 0.1 20));
+
+  --shadow-glow: 0 10px 40px -10px oklch(0.74 0.17 55 / 0.4);
+  --shadow-elegant: 0 20px 60px -20px oklch(0 0 0 / 0.6);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(ellipse at top, oklch(0.45 0.15 25 / 0.15), transparent 60%),
+      radial-gradient(ellipse at bottom, oklch(0.74 0.17 55 / 0.08), transparent 60%);
+    background-attachment: fixed;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-warm {
+    background: var(--gradient-warm);
+  }
+  .bg-gradient-gold {
+    background: var(--gradient-gold);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .ornate-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--gold);
+  }
+  .ornate-divider::before,
+  .ornate-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    max-width: 120px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hover-lift {
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.4s;
+  }
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-elegant);
+  }
+}
