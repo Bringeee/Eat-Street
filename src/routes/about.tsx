@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SectionTitle } from "@/components/site/section-title";
 import { SITE } from "@/lib/site-config";
-import founderImg from "@/assets/gallery/chef.jpg";
+import founderImg from "@/assets/gallery/chef.jpeg";
 import interiorImg from "@/assets/gallery/interior-1.jpg";
+import interiorImg2 from "@/assets/gallery/interior-2.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -29,6 +30,8 @@ function About() {
             alt={SITE.founder}
             className="rounded-xl shadow-elegant w-full"
             loading="lazy"
+            width={500}
+              height={400}
           />
           <div className="absolute -bottom-6 -right-6 bg-gradient-gold text-primary-foreground px-6 py-4 rounded-lg shadow-glow hidden md:block">
             <div className="text-3xl font-display">{SITE.established}</div>
@@ -39,20 +42,8 @@ function About() {
           <p className="text-xs uppercase tracking-[0.3em] text-primary">Founder</p>
           <h3 className="text-3xl font-display text-gradient-gold">{SITE.founder}</h3>
           <p className="text-muted-foreground leading-relaxed">{SITE.story}</p>
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border/40">
-            <div>
-              <div className="text-2xl font-display text-gradient-gold">
-                {new Date().getFullYear() - SITE.established}+
-              </div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">Years</div>
-            </div>
-            <div>
-              <div className="text-2xl font-display text-gradient-gold">3</div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                Generations
-              </div>
-            </div>
-          </div>
+          <p className="text-muted-foreground leading-relaxed">{SITE.restro}</p>
+          <p className="text-muted-foreground leading-relaxed">{SITE.speciality}</p>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SectionTitle } from "@/components/site/section-title";
-import { Zap, BatteryCharging, Wifi, Car } from "lucide-react";
+import { Zap, Utensils, Wifi, Cake, HeartHandshake } from "lucide-react";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -17,22 +17,22 @@ export const Route = createFileRoute("/services")({
 
 const SERVICES = [
   {
-    icon: Zap,
-    title: "DC Fast Charging",
-    desc: "High-speed CCS2 & CHAdeMO ports. Charge to 80% in roughly the time it takes to enjoy a thali.",
-    badge: "Up to 60 kW",
+    icon: Utensils,
+    title: "Buffet System",
+    desc: "Enjoy our lavish buffet featuring a wide variety of Indian and continental dishes prepared fresh every day.",
+    badge: "Unlimited",
   },
   {
-    icon: BatteryCharging,
-    title: "AC Slow Charging",
-    desc: "Dedicated Type-2 AC outlets — perfect for an unhurried evening with family.",
-    badge: "7.4 kW",
+    icon: Cake,
+    title: "Birthday Party Hosting",
+    desc: "Celebrate memorable birthdays with customised decorations, music, and delicious food arrangements.",
+    badge: "Custom Setup",
   },
   {
-    icon: Car,
-    title: "Valet Parking",
-    desc: "Complimentary valet service for all dine-in guests. Pull up to the entrance, we'll take it from there.",
-    badge: "Complimentary",
+    icon: HeartHandshake,
+    title: "Anniversary Celebrations",
+    desc: "Make your special moments unforgettable with elegant seating, candle-light setups, and curated dining experiences.",
+    badge: "Special Arrangements",
   },
   {
     icon: Wifi,
@@ -41,7 +41,6 @@ const SERVICES = [
     badge: "Free",
   },
 ];
-
 function Services() {
   return (
     <div className="container mx-auto px-4 py-20">
@@ -77,9 +76,9 @@ function Services() {
 
       <div className="mt-16 max-w-3xl mx-auto text-center bg-gradient-warm rounded-2xl p-10 shadow-elegant animate-fade-up">
         <Zap className="h-12 w-12 text-gold mx-auto mb-4" strokeWidth={1.5} />
-        <h3 className="text-2xl font-display text-gradient-gold mb-3">
+        {/* <h3 className="text-2xl font-display text-gradient-gold mb-3">
           Powering your journey, one meal at a time.
-        </h3>
+        </h3> */}
         <p className="text-foreground/80">
           We're proud to be one of the first heritage restaurants offering fast EV charging on
           premises — because the future of food and the future of mobility belong together.
