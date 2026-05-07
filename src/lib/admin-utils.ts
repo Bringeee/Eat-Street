@@ -23,9 +23,12 @@ export const supabaseDishToLocal = (dish: SupabaseDish) => ({
   id: dish.id,
   name: dish.name,
   description: dish.description,
-  price: formatPrice(dish.price),
+  price: dish.price ? formatPrice(dish.price) : 0,
   category: dish.category,
   image: dish.image_url || "",
+  hasDualPricing: dish.has_dual_pricing || false,
+  halfPrice: dish.half_plate_price ? formatPrice(dish.half_plate_price) : undefined,
+  fullPrice: dish.full_plate_price ? formatPrice(dish.full_plate_price) : undefined,
 });
 
 /**
