@@ -144,7 +144,7 @@ function MenuPage() {
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
             </div>
-            <div className="p-5">
+            <div className="p-5 flex flex-col flex-1">
               <div className="flex items-baseline justify-between gap-3 mb-2">
                 <h3 className="text-xl font-display text-foreground leading-tight">{d.name}</h3>
                 <div className="text-primary font-medium whitespace-nowrap">
@@ -162,9 +162,11 @@ function MenuPage() {
               </p>
               <Button
                 onClick={() => handleAddDish(d)}
-                className="w-full bg-gradient-warm hover:opacity-90 border border-primary/30 text-white"
+                className="w-full bg-gradient-warm hover:opacity-90 border border-primary/30 text-white mt-auto text-xs"
+                size="sm"
               >
-                <Plus className="mr-2 h-4 w-4" /> Add to Your Thali
+                <Plus className="mr-1 h-3 w-3 flex-shrink-0" />
+                <span className="truncate">Add to Thali</span>
               </Button>
             </div>
           </article>

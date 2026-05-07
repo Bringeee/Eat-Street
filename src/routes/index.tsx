@@ -220,9 +220,9 @@ function Home() {
               size="lg"
               className="bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-glow"
             >
-              <Link to="/categories">
+              <a href="#featured">
                 Explore the Menu <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              </a>
             </Button>
             <Button
               asChild
@@ -237,7 +237,7 @@ function Home() {
       </section>
 
       {/* FEATURED DISHES - MENU SECTION */}
-      <section className="container mx-auto px-4 py-24">
+      <section id="featured" className="container mx-auto px-4 py-24">
         <SectionTitle
           eyebrow="Signature creations"
           title="From the Royal Kitchen"

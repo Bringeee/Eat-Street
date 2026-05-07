@@ -40,7 +40,7 @@ function CategoriesPage() {
           return (
             <Link key={category} to="/menu" search={{ category }} className="no-underline">
               <div
-                className="group bg-card border border-border/40 rounded-xl overflow-hidden hover-lift animate-fade-up transition-all duration-300 h-full cursor-pointer"
+                className="group bg-card border border-border/40 rounded-xl overflow-hidden hover-lift animate-fade-up transition-all duration-300 h-full cursor-pointer flex flex-col"
                 style={{ animationDelay: `${index * 80}ms` }}
               >
                 {/* Image - Clickable */}
@@ -54,14 +54,14 @@ function CategoriesPage() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="text-xl font-display text-foreground mb-2">{category}</h3>
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                     {info.description}
                   </p>
-                  <Button className="w-full bg-gradient-warm hover:opacity-90 border border-primary/30 text-white gap-2">
+                  <Button className="w-full bg-gradient-warm hover:opacity-90 border border-primary/30 text-white gap-2 mt-auto">
                     Explore Menu
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 flex-shrink-0" />
                   </Button>
                 </div>
               </div>

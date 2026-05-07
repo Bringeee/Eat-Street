@@ -190,4 +190,10 @@
     transform: translateY(-6px);
     box-shadow: var(--shadow-elegant);
   }
+
+  button {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+  }
 }
