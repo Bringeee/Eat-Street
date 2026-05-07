@@ -196,9 +196,12 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                     await dishesService.updateDish(editing.id, {
                       name: d.name,
                       description: d.description,
-                      price: convertToPaise(d.price),
+                      price: d.hasDualPricing ? null : convertToPaise(d.price),
                       category: d.category,
                       image_url: d.image || null,
+                      has_dual_pricing: d.hasDualPricing,
+                      half_plate_price: d.hasDualPricing ? convertToPaise(d.halfPrice!) : null,
+                      full_plate_price: d.hasDualPricing ? convertToPaise(d.fullPrice!) : null,
                     });
                     updateDish(editing.id, d);
                     toast.success("Dish updated in Supabase");
@@ -207,10 +210,13 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                     const newDish = await dishesService.createDish({
                       name: d.name,
                       description: d.description,
-                      price: convertToPaise(d.price),
+                      price: d.hasDualPricing ? null : convertToPaise(d.price),
                       category: d.category,
                       image_url: null,
                       is_available: true,
+                      has_dual_pricing: d.hasDualPricing,
+                      half_plate_price: d.hasDualPricing ? convertToPaise(d.halfPrice!) : null,
+                      full_plate_price: d.hasDualPricing ? convertToPaise(d.fullPrice!) : null,
                     });
 
                     if (newDish) {
@@ -298,13 +304,20 @@ function DishForm({
         const trimmedName = name.trim();
         const trimmedDescription = description.trim();
 
-        if (!trimmedName || price <= 0) {
-          toast.error("Name and price required");
+        if (!trimmedName) {
+          toast.error("Name required");
           return;
         }
-        if (hasDualPricing && (halfPrice <= 0 || fullPrice <= 0)) {
-          toast.error("Both prices required");
-          return;
+        if (hasDualPricing) {
+          if (halfPrice <= 0 || fullPrice <= 0) {
+            toast.error("Both half and full prices required");
+            return;
+          }
+        } else {
+          if (price <= 0) {
+            toast.error("Price required");
+            return;
+          }
         }
         onSubmit({
           name: trimmedName,

@@ -16,15 +16,8 @@ import { SectionTitle } from "@/components/site/section-title";
 import { useMenu, useReviews, useAdmin } from "@/lib/store";
 import { formatINR, SITE } from "@/lib/site-config";
 import { reviewsService } from "@/lib/firebase-reviews-service";
-import {
-  ArrowRight,
-  Star,
-  Wifi,
-  Trash2,
-  Phone,
-  Instagram,
-  MapPin
-} from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { ArrowRight, Star, Wifi, Trash2, Phone, Instagram, MapPin } from "lucide-react";
 import {  Utensils, Cake, HeartHandshake } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -111,7 +104,15 @@ function Stars({
 
 function Home() {
   const dishes = useMenu((s) => s.dishes);
-  const featured = dishes.slice(0, 3);
+  
+  // Get 10 random dishes, or all dishes if less than 10 available
+  const getRandomDishes = (dishList: typeof dishes, count: number) => {
+    if (dishList.length <= count) return dishList;
+    const shuffled = [...dishList].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  };
+  
+  const featured = getRandomDishes(dishes, 10);
   const { reviews: storeReviews, add, remove } = useReviews();
   const [reviews, setReviews] = useState(storeReviews);
   const isAdmin = useAdmin((s) => s.isAdmin);
@@ -120,6 +121,7 @@ function Home() {
   const [rating, setRating] = useState(0);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [carouselApi, setCarouselApi] = useState<any>(null);
 
   // Load Firebase reviews on component mount
   useEffect(() => {
@@ -143,6 +145,17 @@ function Home() {
     };
     loadReviews();
   }, [storeReviews]);
+
+  // Auto-scroll carousel
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    const interval = setInterval(() => {
+      carouselApi.scrollNext();
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [carouselApi]);
 
   const submitReview = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -243,39 +256,64 @@ function Home() {
           title="From the Royal Kitchen"
           subtitle="A taste of what awaits — every dish hand-crafted with heirloom recipes and the freshest spices."
         />
-        <div className="grid md:grid-cols-3 gap-6">
-          {featured.map((d, i) => (
-            <div
-              key={d.id}
-              className="group relative overflow-hidden rounded-xl bg-card border border-border/40 hover-lift animate-fade-up"
-              style={{ animationDelay: `${i * 100}ms` }}
+        {featured.length > 0 ? (
+          <>
+            <Carousel 
+              className="w-full"
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              setApi={setCarouselApi}
             >
-              <div className="aspect-[4/5] overflow-hidden">
-                <img
-                  src={d.image}
-                  alt={d.name}
-                  loading="lazy"
-                  width={800}
-                  height={1000}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-2xl font-display text-gradient-gold mb-1">{d.name}</h3>
-                <p className="text-sm text-muted-foreground line-clamp-2 mb-2">{d.description}</p>
-                <p className="text-primary font-medium">{formatINR(d.price)}</p>
-              </div>
+              <CarouselContent className="-ml-4">
+                {featured.map((d, i) => (
+                  <CarouselItem key={d.id} className="pl-4 md:basis-1/2 lg:basis-1/4">
+                    <div
+                      className="group relative overflow-hidden rounded-xl bg-card border border-border/40 hover-lift animate-fade-up h-full"
+                      style={{ animationDelay: `${(i % 4) * 100}ms` }}
+                    >
+                      <div className="aspect-[4/5] overflow-hidden">
+                        <img
+                          src={d.image}
+                          alt={d.name}
+                          loading="lazy"
+                          width={800}
+                          height={1000}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <h3 className="text-2xl font-display text-gradient-gold mb-1">{d.name}</h3>
+                        <p className="text-sm text-muted-foreground line-clamp-2 mb-2">{d.description}</p>
+                        <p className="text-primary font-medium">{formatINR(d.price)}</p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex -left-12" />
+              <CarouselNext className="hidden md:flex -right-12" />
+            </Carousel>
+            <div className="text-center mt-10">
+              <Button asChild variant="ghost" className="text-primary">
+                <Link to="/categories">
+                  View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
-          ))}
-        </div>
-        <div className="text-center mt-10">
-          <Button asChild variant="ghost" className="text-primary">
-            <Link to="/categories">
-              View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
+          </>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground text-lg mb-4">Featured dishes coming soon!</p>
+            <Button asChild variant="outline" className="border-primary/40">
+              <Link to="/categories">
+                Browse Categories <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        )}
       </section>
 
       {/* GALLERY SECTION */}
@@ -353,8 +391,8 @@ function Home() {
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
             { n: `${new Date().getFullYear() - SITE.established}+`, l: "Years of heritage" },
-            { n: "40+", l: "Authentic recipes" },
-            { n: "★ 4.9", l: "Guest rating" },
+            { n: "100+", l: "Authentic recipes" },
+            { n: "★ 4.5", l: "Guest rating" },
             { n: "100%", l: "House-ground spices" },
           ].map((s) => (
             <div key={s.l} className="space-y-1">
@@ -542,7 +580,7 @@ function Home() {
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">
                     {c.label}
                   </p>
-                  <p className="text-foreground group-hover:text-primary transition-colors text-sm">
+                  <p className="text-foreground group-hover:text-primary transition-colors text-xs sm:text-sm break-words">
                     {c.value}
                   </p>
                 </div>

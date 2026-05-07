@@ -41,7 +41,7 @@ export function Header() {
             isHashLink(l) ? (
               <a
                 key={l.label}
-                href={`#${l.hash}`}
+                href={`/#${l.hash}`}
                 className="text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors"
               >
                 {l.label}
@@ -109,7 +109,7 @@ export function Header() {
             isHashLink(l) ? (
               <a
                 key={l.label}
-                href={`#${l.hash}`}
+                href={`/#${l.hash}`}
                 onClick={() => setMobile(false)}
                 className="py-3 text-sm border-b border-border/30 text-foreground/80"
               >

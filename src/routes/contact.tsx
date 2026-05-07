@@ -60,7 +60,7 @@ function Contact() {
               </div>
               <div className="flex-1">
                 <p className="text-xs uppercase tracking-widest text-muted-foreground">{c.label}</p>
-                <p className="text-foreground group-hover:text-primary transition-colors">
+                <p className="text-foreground group-hover:text-primary transition-colors text-xs sm:text-sm break-words">
                   {c.value}
                 </p>
               </div>

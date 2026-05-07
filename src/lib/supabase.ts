@@ -20,10 +20,13 @@ export interface SupabaseDish {
   id: string;
   name: string;
   description: string;
-  price: number;
+  price: number | null;  // Can be null if using dual pricing
   category: Category;
   image_url: string | null;
   is_available: boolean;
+  has_dual_pricing: boolean;           // NEW
+  half_plate_price: number | null;     // NEW
+  full_plate_price: number | null;     // NEW
   created_at: string;
   updated_at: string;
 }
