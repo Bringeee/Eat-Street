@@ -1,7 +1,7 @@
 // Restaurant coordinates — B-4 BSF Colony Airport Road, Gwalior, MP-474020
 export const RESTAURANT_COORDS = {
-  lat: 26.26677,
-  lng: 78.21639,
+  lat: 26.255724,
+  lng: 78.217093,
 } as const;
 
 // Maximum distance (km) for allowing Razorpay payment
