@@ -287,7 +287,11 @@ function Home() {
                       <div className="absolute bottom-0 left-0 right-0 p-6">
                         <h3 className="text-2xl font-display text-gradient-gold mb-1">{d.name}</h3>
                         <p className="text-sm text-muted-foreground line-clamp-2 mb-2">{d.description}</p>
-                        <p className="text-primary font-medium">{formatINR(d.price)}</p>
+                        <p className="text-primary font-medium">
+                          {d.hasDualPricing && d.halfPrice && d.fullPrice
+                            ? `${formatINR(d.halfPrice)} / ${formatINR(d.fullPrice)}`
+                            : formatINR(d.price)}
+                        </p>
                       </div>
                     </div>
                   </CarouselItem>

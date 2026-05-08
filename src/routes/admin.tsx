@@ -147,7 +147,11 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
             <div className="flex-1 p-3 min-w-0">
               <p className="text-xs text-primary uppercase tracking-widest">{d.category}</p>
               <p className="font-medium truncate">{d.name}</p>
-              <p className="text-sm text-muted-foreground">{formatINR(d.price)}</p>
+              <p className="text-sm text-muted-foreground">
+                {d.hasDualPricing && d.halfPrice && d.fullPrice
+                  ? `${formatINR(d.halfPrice)} / ${formatINR(d.fullPrice)}`
+                  : formatINR(d.price)}
+              </p>
               <div className="flex gap-1 mt-2">
                 <Button size="sm" variant="outline" onClick={() => startEdit(d)}>
                   <Pencil className="h-3 w-3" />
@@ -272,22 +276,22 @@ function DishForm({
 }) {
   const [name, setName] = useState(initial.name);
   const [description, setDescription] = useState(initial.description);
-  const [price, setPrice] = useState(initial.price);
+  const [price, setPrice] = useState(initial.price || 0);
   const [category, setCategory] = useState<Category>(initial.category);
   const [image, setImage] = useState(initial.image);
   const [hasDualPricing, setHasDualPricing] = useState(initial.hasDualPricing || false);
-  const [halfPrice, setHalfPrice] = useState(initial.halfPrice || 0);
-  const [fullPrice, setFullPrice] = useState(initial.fullPrice || 0);
+  const [halfPrice, setHalfPrice] = useState(initial.halfPrice && initial.halfPrice > 0 ? initial.halfPrice : 0);
+  const [fullPrice, setFullPrice] = useState(initial.fullPrice && initial.fullPrice > 0 ? initial.fullPrice : 0);
 
   useEffect(() => {
     setName(initial.name);
     setDescription(initial.description);
-    setPrice(initial.price);
+    setPrice(initial.price || 0);
     setCategory(initial.category);
     setImage(initial.image);
     setHasDualPricing(initial.hasDualPricing || false);
-    setHalfPrice(initial.halfPrice || 0);
-    setFullPrice(initial.fullPrice || 0);
+    setHalfPrice(initial.halfPrice && initial.halfPrice > 0 ? initial.halfPrice : 0);
+    setFullPrice(initial.fullPrice && initial.fullPrice > 0 ? initial.fullPrice : 0);
   }, [initial]);
 
   const onFile = (file: File) => {
@@ -363,14 +367,14 @@ function DishForm({
             <Input
               type="number"
               placeholder="Half Plate Price (INR)"
-              value={halfPrice || ""}
-              onChange={(e) => setHalfPrice(Number(e.target.value))}
+              value={halfPrice && halfPrice > 0 ? halfPrice : ""}
+              onChange={(e) => setHalfPrice(Number(e.target.value) || 0)}
             />
             <Input
               type="number"
               placeholder="Full Plate Price (INR)"
-              value={fullPrice || ""}
-              onChange={(e) => setFullPrice(Number(e.target.value))}
+              value={fullPrice && fullPrice > 0 ? fullPrice : ""}
+              onChange={(e) => setFullPrice(Number(e.target.value) || 0)}
             />
           </div>
         )}

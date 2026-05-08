@@ -19,17 +19,19 @@ export const convertToPaise = (inr: number): number => Math.round(inr * 100);
 /**
  * Format a Supabase dish to match the local Dish interface for compatibility
  */
-export const supabaseDishToLocal = (dish: SupabaseDish) => ({
-  id: dish.id,
-  name: dish.name,
-  description: dish.description,
-  price: dish.price ? formatPrice(dish.price) : 0,
-  category: dish.category,
-  image: dish.image_url || "",
-  hasDualPricing: dish.has_dual_pricing || false,
-  halfPrice: dish.half_plate_price ? formatPrice(dish.half_plate_price) : undefined,
-  fullPrice: dish.full_plate_price ? formatPrice(dish.full_plate_price) : undefined,
-});
+export const supabaseDishToLocal = (dish: SupabaseDish) => {
+  return {
+    id: dish.id,
+    name: dish.name,
+    description: dish.description,
+    price: dish.price ? formatPrice(dish.price) : 0,
+    category: dish.category,
+    image: dish.image_url || "",
+    hasDualPricing: !!dish.has_dual_pricing,
+    halfPrice: dish.half_plate_price ? formatPrice(dish.half_plate_price) : undefined,
+    fullPrice: dish.full_plate_price ? formatPrice(dish.full_plate_price) : undefined,
+  };
+};
 
 /**
  * Check if Supabase is configured
