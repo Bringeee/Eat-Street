@@ -9,30 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
-import { Route as ShippingAndDeliveryRouteImport } from './routes/shipping-and-delivery'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ReviewsRouteImport } from './routes/reviews'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as MenuRouteImport } from './routes/menu'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CategoriesRouteImport } from './routes/categories'
-import { Route as CancellationAndRefundRouteImport } from './routes/cancellation-and-refund'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
-const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
-  id: '/terms-and-conditions',
-  path: '/terms-and-conditions',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ShippingAndDeliveryRoute = ShippingAndDeliveryRouteImport.update({
-  id: '/shipping-and-delivery',
-  path: '/shipping-and-delivery',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -41,11 +27,6 @@ const ServicesRoute = ServicesRouteImport.update({
 const ReviewsRoute = ReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MenuRoute = MenuRouteImport.update({
@@ -68,11 +49,6 @@ const CategoriesRoute = CategoriesRouteImport.update({
   path: '/categories',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CancellationAndRefundRoute = CancellationAndRefundRouteImport.update({
-  id: '/cancellation-and-refund',
-  path: '/cancellation-and-refund',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -93,47 +69,35 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/cancellation-and-refund': typeof CancellationAndRefundRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
   '/reviews': typeof ReviewsRoute
   '/services': typeof ServicesRoute
-  '/shipping-and-delivery': typeof ShippingAndDeliveryRoute
-  '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/cancellation-and-refund': typeof CancellationAndRefundRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
   '/reviews': typeof ReviewsRoute
   '/services': typeof ServicesRoute
-  '/shipping-and-delivery': typeof ShippingAndDeliveryRoute
-  '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/cancellation-and-refund': typeof CancellationAndRefundRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
   '/reviews': typeof ReviewsRoute
   '/services': typeof ServicesRoute
-  '/shipping-and-delivery': typeof ShippingAndDeliveryRoute
-  '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,80 +105,50 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
-    | '/cancellation-and-refund'
     | '/categories'
     | '/contact'
     | '/gallery'
     | '/menu'
-    | '/privacy-policy'
     | '/reviews'
     | '/services'
-    | '/shipping-and-delivery'
-    | '/terms-and-conditions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/admin'
-    | '/cancellation-and-refund'
     | '/categories'
     | '/contact'
     | '/gallery'
     | '/menu'
-    | '/privacy-policy'
     | '/reviews'
     | '/services'
-    | '/shipping-and-delivery'
-    | '/terms-and-conditions'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/admin'
-    | '/cancellation-and-refund'
     | '/categories'
     | '/contact'
     | '/gallery'
     | '/menu'
-    | '/privacy-policy'
     | '/reviews'
     | '/services'
-    | '/shipping-and-delivery'
-    | '/terms-and-conditions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
-  CancellationAndRefundRoute: typeof CancellationAndRefundRoute
   CategoriesRoute: typeof CategoriesRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   MenuRoute: typeof MenuRoute
-  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReviewsRoute: typeof ReviewsRoute
   ServicesRoute: typeof ServicesRoute
-  ShippingAndDeliveryRoute: typeof ShippingAndDeliveryRoute
-  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms-and-conditions': {
-      id: '/terms-and-conditions'
-      path: '/terms-and-conditions'
-      fullPath: '/terms-and-conditions'
-      preLoaderRoute: typeof TermsAndConditionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/shipping-and-delivery': {
-      id: '/shipping-and-delivery'
-      path: '/shipping-and-delivery'
-      fullPath: '/shipping-and-delivery'
-      preLoaderRoute: typeof ShippingAndDeliveryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -227,13 +161,6 @@ declare module '@tanstack/react-router' {
       path: '/reviews'
       fullPath: '/reviews'
       preLoaderRoute: typeof ReviewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/menu': {
@@ -264,13 +191,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cancellation-and-refund': {
-      id: '/cancellation-and-refund'
-      path: '/cancellation-and-refund'
-      fullPath: '/cancellation-and-refund'
-      preLoaderRoute: typeof CancellationAndRefundRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -299,16 +219,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
-  CancellationAndRefundRoute: CancellationAndRefundRoute,
   CategoriesRoute: CategoriesRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   MenuRoute: MenuRoute,
-  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ReviewsRoute: ReviewsRoute,
   ServicesRoute: ServicesRoute,
-  ShippingAndDeliveryRoute: ShippingAndDeliveryRoute,
-  TermsAndConditionsRoute: TermsAndConditionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

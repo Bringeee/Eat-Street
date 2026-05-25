@@ -5,7 +5,7 @@ import { SITE } from "@/lib/site-config";
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border/40 bg-card/30">
-      <div className="container mx-auto px-4 py-12 grid gap-10 md:grid-cols-4">
+      <div className="container mx-auto px-4 py-12 grid gap-10 md:grid-cols-3">
         <div>
           <h3 className="text-2xl text-gradient-gold font-display mb-3">{SITE.name}</h3>
           <p className="text-sm text-muted-foreground leading-relaxed">{SITE.tagline}</p>
@@ -40,35 +40,6 @@ export function Footer() {
             >
               <Instagram className="h-4 w-4" /> @{SITE.instagram}
             </a>
-          </div>
-        </div>
-        <div>
-          <h4 className="text-sm uppercase tracking-widest text-primary mb-3">Legal</h4>
-          <div className="space-y-2 text-sm">
-            <Link
-              to="/privacy-policy"
-              className="text-muted-foreground hover:text-primary transition-colors block"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              to="/terms-and-conditions"
-              className="text-muted-foreground hover:text-primary transition-colors block"
-            >
-              Terms & Conditions
-            </Link>
-            <Link
-              to="/cancellation-and-refund"
-              className="text-muted-foreground hover:text-primary transition-colors block"
-            >
-              Cancellation & Refund
-            </Link>
-            <Link
-              to="/shipping-and-delivery"
-              className="text-muted-foreground hover:text-primary transition-colors block"
-            >
-              Shipping & Delivery
-            </Link>
           </div>
         </div>
       </div>
