@@ -22,10 +22,6 @@ export default defineConfig({
 			{ path: "/reviews" },
 			{ path: "/services" },
 			{ path: "/admin" },
-			{ path: "/terms-and-conditions" },
-			{ path: "/privacy-policy" },
-			{ path: "/cancellation-and-refund" },
-			{ path: "/shipping-and-delivery" },
 		],
 	},
 });
