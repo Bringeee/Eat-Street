@@ -156,7 +156,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                       toast.success("Dish deleted from Supabase");
                     } catch (error) {
                       console.error("Error deleting dish:", error);
-                      toast.error("Failed to delete dish");
+                      // toast.error("Failed to delete dish");
                     }
                   }}
                 >
