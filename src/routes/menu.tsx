@@ -165,7 +165,7 @@ function MenuPage() {
                 className="w-full bg-gradient-warm hover:opacity-90 border border-primary/30 text-white mt-auto text-xs"
                 size="sm"
               >
-                <Plus className="mr-1 h-3 w-3 flex-shrink-0" />
+                {/* <Plus className="mr-1 h-3 w-3 flex-shrink-0" /> */}
                 <span className="truncate">Add to Thali</span>
               </Button>
             </div>
