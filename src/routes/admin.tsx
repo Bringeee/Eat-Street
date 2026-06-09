@@ -28,7 +28,7 @@ import { LogOut, Pencil, Plus, Trash2, Eye, EyeOff, X } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin â€” Eat Street" }] }),
+  head: () => ({ meta: [{ title: "Admin Panel - Eat Street" }] }),
   component: Admin,
 });
 

@@ -136,13 +136,13 @@ function Reviews() {
                     <Button
                       size="icon"
                       variant="ghost"
-                      className="text-destructive h-8 w-8"
+                      className="text-destructive"
                       onClick={() => {
                         remove(r.id);
                         toast.success("Review deleted");
                       }}
                     >
-                      <Trash2 className="h-4 w-4" />
+                      {/* <Trash2 className="h-4 w-4" /> */}
                     </Button>
                   )}
                 </div>
