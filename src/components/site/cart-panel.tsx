@@ -1,16 +1,26 @@
 import { useCart } from "@/lib/store";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, Trash2, MessageCircle } from "lucide-react";
+import { Minus, Plus, Trash2, MessageCircle, AlertCircle } from "lucide-react";
 import { formatINR, SITE } from "@/lib/site-config";
 import { toast } from "sonner";
+import { DistanceDisplay } from "./distance-display";
+import { useGeolocation } from "@/hooks/useGeolocation";
 
 export function CartPanel() {
   const { items, setQty, remove, clear, total } = useCart();
+  const { state, distanceKm, withinRange } = useGeolocation();
 
   const handleOrderWhatsApp = () => {
     if (items.length === 0) {
       toast.error("Cart is empty", {
         description: "Please add items before placing an order.",
+      });
+      return;
+    }
+
+    if (!withinRange) {
+      toast.error("Out of delivery range", {
+        description: `You are ${distanceKm} km away. We only deliver within 5 km.`,
       });
       return;
     }
@@ -38,6 +48,11 @@ export function CartPanel() {
 
   return (
     <>
+      {/* Distance Display */}
+      <div className="mb-4 pb-4 border-b border-border/40">
+        <DistanceDisplay />
+      </div>
+
       {/* Cart items */}
       <div className="flex-1 overflow-y-auto py-4 space-y-3">
         {items.map((i) => (
@@ -96,10 +111,21 @@ export function CartPanel() {
           </span>
         </div>
 
+        {/* Out of range warning */}
+        {state === "granted" && !withinRange && (
+          <div className="flex gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/30">
+            <AlertCircle className="h-4 w-4 text-destructive flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-destructive">
+              You are {distanceKm} km away. We only deliver within 5 km.
+            </p>
+          </div>
+        )}
+
         {/* Order on WhatsApp button */}
         <Button
           onClick={handleOrderWhatsApp}
-          className="w-full text-white shadow-glow transition-all duration-300 bg-gradient-gold hover:opacity-90"
+          disabled={state === "granted" && !withinRange}
+          className="w-full text-white shadow-glow transition-all duration-300 bg-gradient-gold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           size="lg"
         >
           <MessageCircle className="mr-2 h-4 w-4" />

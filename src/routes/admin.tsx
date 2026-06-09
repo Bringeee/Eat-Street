@@ -116,18 +116,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
           >
             <Plus className="mr-2 h-4 w-4" />
             Add Dish
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => {
-              if (confirm("Clear all local menu items? This only clears your browser cache.")) {
-                localStorage.removeItem("saffron-menu");
-                window.location.reload();
-              }
-            }}
-          >
-            Clear Local Menu
-          </Button>
+          </Button> 
           <Button variant="ghost" onClick={onLogout}>
             <LogOut className="mr-2 h-4 w-4" />
             Sign Out
@@ -254,7 +243,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                   setOpen(false);
                 } catch (error) {
                   console.error("Error saving dish:", error);
-                  toast.error("Failed to save dish to Supabase");
+                  // toast.error("Failed to save dish to Supabase");
                 }
               }}
             />
