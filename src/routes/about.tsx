@@ -3,7 +3,6 @@ import { SectionTitle } from "@/components/site/section-title";
 import { SITE } from "@/lib/site-config";
 import founderImg from "@/assets/gallery/chef.jpeg";
 import interiorImg from "@/assets/gallery/interior-1.jpg";
-import interiorImg2 from "@/assets/gallery/interior-2.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

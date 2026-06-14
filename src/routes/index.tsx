@@ -6,8 +6,7 @@ import g1 from "@/assets/gallery/interior-1.jpg";
 import g2 from "@/assets/gallery/tandoor.jpg";
 import g3 from "@/assets/gallery/spices.jpg";
 import g4 from "@/assets/gallery/thali.jpg";
-import g5 from "@/assets/gallery/dining-room.jpg";
-import g6 from "@/assets/gallery/interior-2.jpg";
+// dining-room and interior-2 removed
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,9 +25,7 @@ const IMAGES = [
   { src: g1, alt: "Lantern-lit dining hall" },
   { src: g4, alt: "Royal thali platter" },
   { src: g2, alt: "Tandoor oven flames" },
-  { src: g6, alt: "Chef garnishing curry" },
   { src: g3, alt: "Indian spice palette" },
-  { src: g5, alt: "Private dining room" },
 ];
 
 const SERVICES = [
